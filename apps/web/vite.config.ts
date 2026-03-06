@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: Number(process.env.VITE_PORT ?? 5173),
     proxy: {
-      "/pongs": process.env.VITE_API_URL ?? "http://localhost:3000",
+      "/pongs": process.env.API_PROXY_TARGET ?? "http://localhost:3000",
     },
   },
 });

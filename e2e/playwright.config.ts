@@ -20,7 +20,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "VITE_PORT=5174 VITE_API_URL=http://localhost:3001 pnpm web:dev",
+    command:
+      "VITE_PORT=5174 API_PROXY_TARGET=http://localhost:3001 pnpm web:dev",
     url: "http://localhost:5174",
     reuseExistingServer: !process.env.CI,
   },

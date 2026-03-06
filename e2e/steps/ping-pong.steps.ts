@@ -8,7 +8,21 @@ Given("I open the app", async ({ page }) => {
 });
 
 Given("I clear all pongs", async ({ page }) => {
+  const deleteResponse = page.waitForResponse(
+    (res) =>
+      res.url().includes("/pongs") &&
+      res.request().method() === "DELETE" &&
+      res.ok(),
+  );
+  const refetchResponse = page.waitForResponse(
+    (res) =>
+      res.url().includes("/pongs") &&
+      res.request().method() === "GET" &&
+      res.ok(),
+  );
   await page.getByTestId("clear-button").click();
+  await deleteResponse;
+  await refetchResponse;
   await expect(page.getByTestId("empty-state")).toBeVisible();
 });
 
