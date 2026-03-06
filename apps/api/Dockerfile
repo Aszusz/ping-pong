@@ -12,6 +12,7 @@ COPY tsconfig.base.json ./
 RUN pnpm --filter @ping-pong/api run build
 
 FROM node:20-alpine
+ENV CI=true
 RUN corepack enable pnpm
 WORKDIR /app
 COPY --from=build /app ./
