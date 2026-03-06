@@ -1,0 +1,15 @@
+{
+  "name": "ping-pong",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker compose --env-file .env.local up -d",
+    "docker:down": "docker compose --env-file .env.local down",
+    "docker:reset": "docker compose --env-file .env.local down -v",
+    "db:push": "dotenv -e .env.local -- pnpm --filter @ping-pong/db run push",
+    "web:dev": "pnpm --filter @ping-pong/web run dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "dotenv-cli": "^8.0.0"
+  }
+}
