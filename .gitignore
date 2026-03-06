@@ -3,3 +3,6 @@ dist
 .env.local
 pnpm-lock.yaml
 .playwright-mcp
+e2e/.features-gen/
+test-results/
+playwright-report/

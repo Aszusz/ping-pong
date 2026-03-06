@@ -13,6 +13,6 @@ export default tseslint.config(
     rules: reactHooks.configs.recommended.rules,
   },
   {
-    ignores: ["**/node_modules/**", "**/dist/**"],
+    ignores: ["**/node_modules/**", "**/dist/**", "e2e/.features-gen/**"],
   },
 );
