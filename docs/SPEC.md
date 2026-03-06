@@ -8,25 +8,25 @@ A simple application where users can create and manage **Pong messages**.
 
 The interface contains:
 
-* **Ping button** – creates a new Pong message
-* **Refresh button** – reloads the list of messages
-* **Clear button** – deletes all messages
-* **Pong message list**
+- **Ping button** – creates a new Pong message
+- **Refresh button** – reloads the list of messages
+- **Clear button** – deletes all messages
+- **Pong message list**
 
 ### Pong Message Structure
 
 Each message contains:
 
-* **Date and time** (displayed in larger font)
-* **UUID** (displayed in smaller font)
+- **Date and time** (displayed in larger font)
+- **UUID** (displayed in smaller font)
 
 ### Behavior
 
-* When the app starts, it **loads the list of Pong messages**.
-* Clicking **Ping** creates a new Pong message and **stores it in the database**.
-* Clicking **Refresh** **reloads the messages** from the backend (no real-time updates).
-* Clicking **Clear** **removes all Pong messages** from the database.
-* There is **no authentication**. All users share a **single table**.
+- When the app starts, it **loads the list of Pong messages**.
+- Clicking **Ping** creates a new Pong message and **stores it in the database**.
+- Clicking **Refresh** **reloads the messages** from the backend (no real-time updates).
+- Clicking **Clear** **removes all Pong messages** from the database.
+- There is **no authentication**. All users share a **single table**.
 
 ---
 
@@ -36,8 +36,8 @@ Each message contains:
 
 The monorepo should include:
 
-* **pnpm workspaces**
-* **Docker containers**
+- **pnpm workspaces**
+- **Docker containers**
 
 ---
 
@@ -45,18 +45,17 @@ The monorepo should include:
 
 ### `api`
 
-* Backend service
-* Built with **Fastify**
+- Backend service
+- Built with **Fastify**
 
 ### `web`
 
-* Web frontend
-* Built with:
-
-  * **React**
-  * **Vite**
-  * **TanStack Query**
-  * **Tailwind CSS**
+- Web frontend
+- Built with:
+  - **React**
+  - **Vite**
+  - **TanStack Query**
+  - **Tailwind CSS**
 
 ---
 
@@ -64,16 +63,16 @@ The monorepo should include:
 
 ### `db`
 
-* Database schema and configuration
-* **Drizzle ORM**
-* Types **inferred from schema**
+- Database schema and configuration
+- **Drizzle ORM**
+- Types **inferred from schema**
 
 ---
 
 # Database
 
-* **PostgreSQL**
-* Managed through Docker containers
+- **PostgreSQL**
+- Managed through Docker containers
 
 ---
 
@@ -87,29 +86,28 @@ The monorepo should include:
 
 # Docker Containers
 
-| Container  | Purpose                |
-| ---------- | ---------------------- |
-| `db-dev`   | Development PostgreSQL |
-| `api-dev`  | Development API        |
+| Container | Purpose                |
+| --------- | ---------------------- |
+| `db-dev`  | Development PostgreSQL |
+| `api-dev` | Development API        |
 
 ---
 
 # Ports
 
-| Service        | Dev  |
-| -------------- | ---- |
-| PostgreSQL     | 5432 |
-| API            | 3000 |
-| Vite (web)     | 5173 |
+| Service    | Dev  |
+| ---------- | ---- |
+| PostgreSQL | 5432 |
+| API        | 3000 |
+| Vite (web) | 5173 |
 
 ---
 
 # Dependency Management
 
-* Use **Context7** to:
-
-  * access the **latest documentation**
-  * install the **latest compatible dependency versions**
+- Use **Context7** to:
+  - access the **latest documentation**
+  - install the **latest compatible dependency versions**
 
 ---
 
@@ -117,11 +115,11 @@ The monorepo should include:
 
 ### Infrastructure
 
-* `docker:up` — start all containers (`db-dev`, `api-dev`)
-* `docker:down` — stop and remove containers (keep database volumes)
-* `docker:reset` — stop containers and remove volumes (wipe databases)
-* `db:push` — push Drizzle schema
+- `docker:up` — start all containers (`db-dev`, `api-dev`)
+- `docker:down` — stop and remove containers (keep database volumes)
+- `docker:reset` — stop containers and remove volumes (wipe databases)
+- `db:push` — push Drizzle schema
 
 ### Development
 
-* `web:dev` — start the Vite development server for the web app (`5173`)
+- `web:dev` — start the Vite development server for the web app (`5173`)
