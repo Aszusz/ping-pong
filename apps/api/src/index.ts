@@ -3,7 +3,10 @@ import cors from "@fastify/cors";
 import { pongRoutes } from "./routes/pongs.js";
 
 const app = fastify({
-  logger: { transport: { target: "pino-pretty" } },
+  logger:
+    process.env.NODE_ENV === "production"
+      ? true
+      : { transport: { target: "pino-pretty" } },
 });
 
 const port = Number(process.env.PORT ?? 3000);
@@ -15,7 +18,7 @@ await app.register(cors, {
 });
 await app.register(pongRoutes);
 
-app.listen({ port }, (err, address) => {
+app.listen({ port, host: "0.0.0.0" }, (err, address) => {
   if (err) {
     app.log.error(err);
     process.exit(1);
