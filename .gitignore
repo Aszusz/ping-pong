@@ -3,3 +3,6 @@ dist
 *.tsbuildinfo
 *.local
 .playwright-mcp/
+.features-gen/
+playwright-report/
+test-results/

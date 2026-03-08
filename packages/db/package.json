@@ -7,7 +7,8 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "drizzle-kit": "drizzle-kit"
+    "drizzle-kit": "drizzle-kit",
+    "push": "drizzle-kit push && DATABASE_URL=postgresql://postgres:postgres@localhost:5433/pingpong_test drizzle-kit push"
   },
   "dependencies": {
     "drizzle-orm": "^0.39",

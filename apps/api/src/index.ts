@@ -6,13 +6,16 @@ const app = fastify({
   logger: { transport: { target: "pino-pretty" } },
 });
 
+const port = Number(process.env.PORT ?? 3000);
+const corsOrigin = process.env.CORS_ORIGIN ?? "http://localhost:5173";
+
 await app.register(cors, {
-  origin: "http://localhost:5173",
+  origin: corsOrigin,
   methods: ["GET", "POST", "DELETE"],
 });
 await app.register(pongRoutes);
 
-app.listen({ port: 3000 }, (err, address) => {
+app.listen({ port }, (err, address) => {
   if (err) {
     app.log.error(err);
     process.exit(1);

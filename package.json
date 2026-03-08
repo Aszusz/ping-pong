@@ -3,19 +3,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "db:push": "pnpm --filter @ping-pong/api exec drizzle-kit push",
+    "db:push": "pnpm --filter @ping-pong/db push",
     "dev:api": "pnpm --filter @ping-pong/api dev",
     "dev:web": "pnpm --filter @ping-pong/web dev",
     "format": "prettier --write .",
     "lint": "eslint .",
     "typecheck": "tsc -b --noEmit",
-    "qual": "pnpm format && pnpm lint && pnpm typecheck"
+    "qual": "pnpm format && pnpm lint && pnpm typecheck",
+    "test": "pnpm exec bddgen && pnpm exec playwright test"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.4.0",
+    "playwright-bdd": "^8.4.2",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",

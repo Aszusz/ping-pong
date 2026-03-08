@@ -10,6 +10,11 @@ export default defineConfig(
   tseslint.configs.recommended,
   eslintConfigPrettier,
   {
-    ignores: ["**/node_modules/", "**/dist/"],
+    ignores: ["**/node_modules/", "**/dist/", ".features-gen/"],
+  },
+  {
+    rules: {
+      "no-empty-pattern": "off",
+    },
   },
 );
