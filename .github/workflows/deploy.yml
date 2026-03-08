@@ -1,0 +1,74 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  qual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm prettier --check .
+      - run: pnpm lint
+      - run: pnpm typecheck
+
+  test:
+    needs: qual
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: pingpong_test
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=5
+    env:
+      TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5433/pingpong_test
+      TEST_HOST: http://localhost
+      TEST_API_PORT: 3001
+      TEST_WEB_PORT: 5174
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: DATABASE_URL=$TEST_DATABASE_URL pnpm --filter @ping-pong/db drizzle-kit push
+      - run: pnpm exec bddgen
+      - run: pnpm exec playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i -g @railway/cli
+      - run: railway up --service "@ping-pong/api" --detach -m "deploy ${{ github.ref_name }}"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      - run: railway up --service "@ping-pong/web" --detach -m "deploy ${{ github.ref_name }}"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
