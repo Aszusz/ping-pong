@@ -1,7 +1,10 @@
 import { expect } from "@playwright/test";
 import { createBdd } from "playwright-bdd";
 
-const API_BASE = process.env.API_BASE ?? "http://localhost:3000";
+if (!process.env.API_BASE)
+  throw new Error("Missing required env variable: API_BASE");
+
+const API_BASE = process.env.API_BASE;
 
 const { Given, When, Then } = createBdd();
 

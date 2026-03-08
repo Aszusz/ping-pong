@@ -9,8 +9,12 @@ const app = fastify({
       : { transport: { target: "pino-pretty" } },
 });
 
-const port = Number(process.env.PORT ?? 3000);
-const corsOrigin = process.env.CORS_ORIGIN ?? "http://localhost:5173";
+if (!process.env.PORT) throw new Error("Missing required env variable: PORT");
+if (!process.env.CORS_ORIGIN)
+  throw new Error("Missing required env variable: CORS_ORIGIN");
+
+const port = Number(process.env.PORT);
+const corsOrigin = process.env.CORS_ORIGIN;
 
 await app.register(cors, {
   origin: corsOrigin,

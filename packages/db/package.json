@@ -8,9 +8,9 @@
   },
   "scripts": {
     "drizzle-kit": "drizzle-kit",
-    "push": "drizzle-kit push && DATABASE_URL=postgresql://postgres:postgres@localhost:5433/pingpong_test drizzle-kit push",
-    "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "push": "set -a && . ../../.env && set +a && drizzle-kit push && DATABASE_URL=${TEST_DATABASE_URL:?Missing TEST_DATABASE_URL} drizzle-kit push",
+    "generate": "set -a && . ../../.env && set +a && drizzle-kit generate",
+    "migrate": "set -a && . ../../.env && set +a && drizzle-kit migrate"
   },
   "dependencies": {
     "drizzle-orm": "^0.39",
