@@ -1,0 +1,9 @@
+{
+  "name": "ping-pong",
+  "private": true,
+  "scripts": {
+    "db:push": "pnpm --filter @ping-pong/api exec drizzle-kit push",
+    "dev:api": "pnpm --filter @ping-pong/api dev",
+    "dev:web": "pnpm --filter @ping-pong/web dev"
+  }
+}
