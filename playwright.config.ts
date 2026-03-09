@@ -33,6 +33,8 @@ export default defineConfig({
       command: `pnpm --filter @ping-pong/api dev`,
       port: TEST_API_PORT,
       reuseExistingServer: false,
+      stdout: "pipe",
+      stderr: "pipe",
       env: {
         DATABASE_URL: TEST_DB_URL,
         PORT: String(TEST_API_PORT),
@@ -43,6 +45,8 @@ export default defineConfig({
       command: `pnpm --filter @ping-pong/web dev -- --port ${TEST_WEB_PORT}`,
       port: TEST_WEB_PORT,
       reuseExistingServer: false,
+      stdout: "pipe",
+      stderr: "pipe",
       env: {
         VITE_API_URL: TEST_API_URL,
       },
