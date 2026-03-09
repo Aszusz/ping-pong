@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "typecheck": "tsc -b --noEmit",
     "qual": "pnpm format && pnpm lint && pnpm typecheck",
-    "test": "set -a && . .env && set +a && pnpm exec bddgen && pnpm exec playwright test",
+    "test": "pnpm exec bddgen && dotenv -- pnpm exec playwright test",
     "db:generate": "pnpm --filter @ping-pong/db generate",
     "db:migrate": "pnpm --filter @ping-pong/db migrate",
     "build:api": "pnpm --filter @ping-pong/api start",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.58.2",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^10.0.3",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.4.0",
