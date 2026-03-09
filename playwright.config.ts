@@ -42,7 +42,7 @@ export default defineConfig({
       },
     },
     {
-      command: `pnpm --filter @ping-pong/web dev -- --port ${TEST_WEB_PORT}`,
+      command: `pnpm --filter @ping-pong/web dev --port ${TEST_WEB_PORT}`,
       port: TEST_WEB_PORT,
       reuseExistingServer: false,
       stdout: "pipe",
